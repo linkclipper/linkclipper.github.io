@@ -1,74 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>LinkClipper — save the web you want to revisit</title>
-<meta name="description" content="Collect shorts, reels, videos, and articles from the web into boards you can tag, search, and revisit. Local-first Chrome extension with optional cloud sync." />
-<link rel="stylesheet" href="styles.css" />
-<link rel="icon" type="image/png" href="assets/icon128.png" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0c18" />
+  <title>LinkClipper — the web, worth keeping</title>
+  <meta name="description" content="Save videos, articles and pages into a beautiful, searchable local library. Boards, notes, quick capture and sharing — no account required. Chrome and Brave extension." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="assets/icon128.png" />
 </head>
 <body>
-<div class="wrap">
+  <div class="wrap">
+    <nav class="top" aria-label="Main navigation">
+      <a class="logo" href="./" aria-label="LinkClipper home"><span class="mark">W</span> LinkClipper</a>
+      <div class="links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#privacy">Privacy</a>
+        <a class="nav-cta" href="https://github.com/linkclipper/linkclipper/releases/latest">Get the extension ↗</a>
+      </div>
+    </nav>
 
-  <nav class="top">
-    <div class="logo"><span class="mark">W</span> LinkClipper</div>
-    <div class="links">
-      <a href="#features">Features</a>
-      <a href="privacy.html">Privacy</a>
-      <a class="btn ghost" href="https://github.com/LinkClipper-app" target="_blank" rel="noreferrer">GitHub</a>
-    </div>
-  </nav>
+    <main>
+      <header class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="signal"></span> YOUR PERSONAL INTERNET LIBRARY</span>
+          <h1>The good stuff<br />doesn't have to <em>get lost.</em></h1>
+          <p class="sub">Save the videos, articles and ideas worth coming back to. Give them a home in beautiful boards you can search offline, then read or play when connected.</p>
+          <div class="cta">
+            <a class="btn" href="https://github.com/linkclipper/linkclipper/releases/latest">Download the latest release <span aria-hidden="true">↗</span></a>
+            <a class="btn ghost" href="#how-it-works">See how it works <span aria-hidden="true">↓</span></a>
+          </div>
+          <p class="release-note">Latest tagged download: v0.3.0 · v0.4.0 features shown here are in source review, not yet in the download. Chrome Web Store listing coming soon.</p>
+          <div class="trust-row"><span>✦ No account</span><span>◎ Local by default</span><span>⌘ Keyboard friendly</span></div>
+        </div>
+        <figure class="hero-visual">
+          <div class="visual-top"><span class="visual-dots">● ● ●</span><span>YOUR COLLECTION</span><span>✦</span></div>
+          <img src="assets/webstore-1-grid.png" alt="LinkClipper dashboard with saved videos and articles organized into boards" width="1280" height="800" />
+          <figcaption>Preview of the upcoming v0.4.0 dashboard.</figcaption>
+        </figure>
+      </header>
 
-  <header class="hero">
-    <h1>Save the web you love.<br><em>Find it again, in one place.</em></h1>
-    <p class="sub">Collect YouTube Shorts, reels, videos, and articles into Pinterest-style boards as you browse —
-       with tags, notes, instant search, and preview playback without leaving your dashboard.</p>
-    <div class="cta">
-      <a class="btn" href="https://chromewebstore.google.com" target="_blank" rel="noreferrer">&#128394; Add to Chrome</a>
-      <a class="btn ghost" href="#features">See how it works</a>
-    </div>
-    <div class="muted">Free &amp; open source · Local-first · Works in Chrome and Brave</div>
-  </header>
+      <section class="proof" aria-label="Product promises">
+        <div><strong>01</strong><span>Capture intentionally</span><p>Nothing saves until you say so.</p></div>
+        <div><strong>02</strong><span>Find your way back</span><p>Boards, tags and instant search.</p></div>
+        <div><strong>03</strong><span>Keep it yours</span><p>Your library works without us.</p></div>
+      </section>
 
-  <section class="shots">
-    <figure><img src="assets/webstore-1-grid.png" alt="LinkClipper dashboard - masonry grid of saved shots, reels and articles" /><figcaption>Your boards, a beautiful skip-to-your-thing grid</figcaption></figure>
-    <figure><img src="assets/webstore-2-reader.png" alt="In-place article reader" /><figcaption>Read saved articles right in the dashboard</figcaption></figure>
-    <figure><img src="assets/webstore-3-edit.png" alt="Edit card with tags, notes and preview" /><figcaption>Tags, notes and one-click previews</figcaption></figure>
-  </section>
+      <section class="section" id="features">
+        <div class="section-heading"><span class="eyebrow">A CALMER WAY TO COLLECT · v0.4.0 PREVIEW</span><h2>Everything you kept.<br /><em>Finally useful again.</em></h2><p>Made for the browser you already use, with the speed of a clipping tool and the feeling of your own space. New features below are in source review ahead of the next tagged download.</p></div>
+        <div class="feature-grid">
+          <article class="feature feature-wide"><span class="feature-icon">↗</span><h3>Save in your flow</h3><p>Open quick save with Alt+Shift+L, choose a board, then explicitly save with Ctrl/⌘+Enter. Or use the toolbar and in-page save buttons on supported sites.</p><div class="key-demo"><kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>L</kbd><span>→</span><span>choose a board</span><span>→</span><kbd>Ctrl/⌘</kbd> + <kbd>Enter</kbd></div></article>
+          <article class="feature"><span class="feature-icon">▦</span><h3>Organize visually</h3><p>Color-coded boards, tags, notes and a masonry view. Move, tag or delete multiple items when your collection grows.</p></article>
+          <article class="feature"><span class="feature-icon">⌕</span><h3>Find it in a second</h3><p>Search titles, notes, tags and URLs. Filter by type or board, or jump around with the configurable command palette.</p></article>
+          <article class="feature"><span class="feature-icon">▷</span><h3>Watch and read here</h3><p>Read saved articles in a clean dashboard view. Play Vimeo, Instagram and TikTok inline; YouTube opens in a floating player.</p></article>
+          <article class="feature"><span class="feature-icon">✦</span><h3>Make it yours</h3><p>Add an optional local profile to your library. Your name and avatar stay on this device — no sign-in, feed or public identity.</p></article>
+          <article class="feature feature-wide"><span class="feature-icon">◈</span><h3>Share a board snapshot</h3><p>Create a self-contained link to a board you choose. It’s a static snapshot, not a live or revocable share — make a new link when the board changes.</p></article>
+        </div>
+      </section>
 
-  <section class="features" id="features">
-    <h2>Everything you saved becomes useful again</h2>
-    <div class="grid">
-      <div class="card"><h3><span class="ic">&#9889;</span>One-click save</h3><p>Hit the toolbar icon on any page, or use the in-page save buttons we put next to videos on YouTube, Instagram, X, Reddit and TikTok.</p></div>
-      <div class="card"><h3><span class="ic">&#128684;</span>In-page save buttons</h3><p>A small W button appears right inside YouTube's action rail and list thumbnails — save without hunting for the extension icon.</p></div>
-      <div class="card"><h3><span class="ic">&#128214;</span>Read-in-place</h3><p>Saved articles open as clean, readable text inside your dashboard. No tab juggling, no paywall-style layouts — just the words.</p></div>
-      <div class="card"><h3><span class="ic">&#9654;&#65039;</span>Play back instantly</h3><p>Reels and TikToks play inline. YouTube packs a floating mini-player you can park beside your boards. Vimeo plays right in the card.</p></div>
-      <div class="card"><h3><span class="ic">&#128506;</span>Boards &amp; tags</h3><p>Pinterest-style boards with colors, drag-and-drop cards, tag autocomplete and instant full-text search — titles, notes, URLs and tags.</p></div>
-      <div class="card"><h3><span class="ic">&#9784;&#65039;</span>Local-first sync</h3><p>Everything lives in your browser by default. Point it at your own Supabase project and your boards follow you to any machine — you own the data.</p></div>
-    </div>
-  </section>
+      <section class="section workflow" id="how-it-works">
+        <div class="section-heading"><span class="eyebrow">THREE SIMPLE STEPS</span><h2>Save now. <em>Come back inspired.</em></h2></div>
+        <div class="steps">
+          <div><span class="step-number">01</span><h3>Spot something good</h3><p>A video, thread, article or page you don’t want to lose.</p></div>
+          <div><span class="step-number">02</span><h3>Choose where it belongs</h3><p>Open the popup, pick a board, add a note or tag, then save.</p></div>
+          <div><span class="step-number">03</span><h3>Rediscover it</h3><p>Search your library, switch boards, read or watch in place.</p></div>
+        </div>
+        <div class="shot-pair">
+          <figure><img src="assets/webstore-2-reader.png" alt="Reading an article inside LinkClipper" loading="lazy" /><figcaption>A quieter reading view</figcaption></figure>
+          <figure><img src="assets/webstore-3-edit.png" alt="Editing a saved item with notes and tags" loading="lazy" /><figcaption>Details you’ll remember</figcaption></figure>
+        </div>
+      </section>
 
-  <section class="strip">
-    <div class="box">
-      <h2>Local-first. Zero tracking.</h2>
-      <p>LinkClipper keeps your saves in local storage on your device. We (the developers) receive no data — no analytics,
-         no accounts, no servers. Optional cloud sync talks only to <strong>your own</strong> Supabase project if you choose to set it up.</p>
-      <a class="btn ghost" href="privacy.html">Read the privacy policy</a>
-    </div>
-  </section>
+      <section class="privacy-panel" id="privacy">
+        <div><span class="eyebrow">YOURS FROM DAY ONE</span><h2>Private by design.<br /><em>Useful without an account.</em></h2><p>Your clips live in browser storage and core features work offline. Export a JSON backup any time. Optional sync connects to your own Supabase project; it isn’t required to use LinkClipper.</p><div class="privacy-links"><a href="privacy.html">Read the privacy policy ↗</a><a href="https://github.com/linkclipper/linkclipper/blob/main/docs/ROADMAP.md">See the roadmap ↗</a></div></div>
+        <div class="privacy-symbol" aria-hidden="true">✦<small>YOUR SPACE<br />YOUR RULES</small></div>
+      </section>
 
-  <footer>
-    <div class="f">
-      <span>&#169; 2026 LinkClipper · Built for people who save too much</span>
-      <span>
-        <a href="privacy.html">Privacy policy</a> ·
-        <a href="https://github.com/LinkClipper-app" target="_blank" rel="noreferrer">GitHub</a> ·
-        <a href="mailto:support@linkclipper.app">support@linkclipper.app</a>
-      </span>
-    </div>
-  </footer>
+      <section class="section faq" id="faq"><div class="section-heading"><span class="eyebrow">GOOD TO KNOW</span><h2>Before you begin</h2></div><div class="faq-grid">
+        <div><h3>Is LinkClipper in the Chrome Web Store?</h3><p>Not yet. The public release is available on GitHub while the store listing is being prepared. Follow the release instructions to load the extension.</p></div>
+        <div><h3>Do I have to create an account?</h3><p>No. A local profile is optional and stays on your device. Sync is also optional and uses a project you control.</p></div>
+        <div><h3>Can I revoke a board link?</h3><p>Current share links contain a static snapshot. Anyone with the link can retain it; it cannot be revoked. Only share boards you intend to make public.</p></div>
+      </div></section>
 
-</div>
+      <section class="final-cta"><span class="eyebrow">READY WHEN YOU ARE</span><h2>Give your next great find<br />a place to live.</h2><a class="btn" href="https://github.com/linkclipper/linkclipper/releases/latest">Get LinkClipper on GitHub ↗</a></section>
+    </main>
+
+    <footer><div class="footer-brand"><span class="mark">W</span><div><strong>LinkClipper</strong><small>Keep the web worth keeping.</small></div></div><div class="footer-links"><a href="https://github.com/linkclipper/linkclipper">Source</a><a href="https://github.com/linkclipper/linkclipper/releases">Releases</a><a href="https://github.com/linkclipper/linkclipper/blob/main/docs/ROADMAP.md">Roadmap</a><a href="privacy.html">Privacy</a><a href="https://github.com/linkclipper/linkclipper/issues">Support</a></div><p>© 2026 LinkClipper · Free, open source and local-first.</p></footer>
+  </div>
 </body>
 </html>
