@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A shared board · LinkClipper</title>
+  <meta name="description" content="A board shared with a LinkClipper link. Save the web you love — find it again, in one place." />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    main { max-width: 1120px; margin: 0 auto; padding: 36px 24px 80px; }
+    .board-head { display: flex; align-items: center; gap: 14px; margin: 8px 0 6px; }
+    .board-dot { width: 18px; height: 18px; border-radius: 50%; box-shadow: 0 0 18px rgba(124,108,255,.45); }
+    h1.board-name { font-size: 30px; font-weight: 600; margin: 0; }
+    .board-desc { color: var(--ink-dim); font-size: 14.5px; margin: 2px 0 26px; max-width: 720px; }
+    .grid { columns: 3 260px; column-gap: 16px; }
+    .card {
+      break-inside: avoid; margin-bottom: 16px;
+      background: linear-gradient(170deg, rgba(26,31,62,.9), rgba(15,19,40,.84));
+      border: 1px solid var(--stroke); border-radius: 16px; overflow: hidden;
+      transition: border-color .15s ease-out, transform .15s ease-out;
+    }
+    .card:hover { border-color: var(--stroke-hi); transform: translateY(-2px); }
+    .card a { text-decoration: none; color: var(--ink); display: block; }
+    .card .art { width: 100%; aspect-ratio: 16 / 10; background: linear-gradient(135deg, rgba(123,108,255,.22), rgba(180,107,255,.12)); display: block; }
+    .card .art.tall { aspect-ratio: 4 / 5; }
+    .card .art + .pad { margin-top: -4px; }
+    .card .pad { padding: 12px 14px 14px; }
+    .card .ttl { font-size: 14px; font-weight: 500; line-height: 1.35; }
+    .card .src { color: var(--ink-dim); font-size: 11.5px; margin-top: 5px; }
+    .card .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .card .chip {
+      font-size: 10.5px; color: var(--brand-ink); border: 1px solid var(--stroke);
+      border-radius: 999px; padding: 2px 8px; background: rgba(124,108,255,.12);
+    }
+    .card .kind {
+      position: absolute; margin: 10px; padding: 3px 10px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--brand1), var(--brand2));
+      color: #fff; font-size: 10.5px; font-weight: 600; letter-spacing: .2px;
+      box-shadow: 0 4px 14px rgba(98,62,255,.35);
+    }
+    .card .pos { position: relative; }
+    .broken {
+      background: linear-gradient(170deg, rgba(26,31,62,.9), rgba(15,19,40,.84));
+      border: 1px solid var(--stroke); border-radius: 16px; padding: 34px 30px; max-width: 640px;
+    }
+    .empty-note { color: var(--ink-dim); font-size: 14px; margin-top: 10px; }
+    .cta {
+      margin-top: 34px; padding: 18px 20px; border-radius: 14px; border: 1px solid var(--stroke);
+      background: linear-gradient(120deg, rgba(124,108,255,.14), rgba(168,85,247,.08));
+      display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+    }
+    .cta p { margin: 0; color: var(--ink-dim); font-size: 13.5px; flex: 1; min-width: 240px; }
+    .cta b { color: var(--ink); }
+    footer.site-foot { color: var(--ink-dim); font-size: 12px; text-align: center; padding: 30px 0 44px; }
+    footer.site-foot a { color: var(--brand-ink); }
+  </style>
+</head>
+<body>
+  <nav class="top">
+    <div class="logo"><span class="mark">W</span> LinkClipper</div>
+    <div class="links">
+      <a class="btn ghost" href="/privacy.html">Privacy</a>
+      <a class="btn" href="/">&#128394; Get LinkClipper</a>
+    </div>
+  </nav>
+
+  <main>
+    <div id="boardView" hidden>
+      <div class="board-head">
+        <span class="board-dot" id="bDot"></span>
+        <h1 class="board-name" id="bName"></h1>
+      </div>
+      <p class="board-desc" id="bDesc"></p>
+      <div class="grid" id="bGrid"></div>
+      <div class="cta">
+        <p><b>Save links like these into your own boards.</b>
+          LinkClipper is a local-first browser extension — clips videos, reels and
+          articles, plays and reads them in place. No account, everything stays in your browser.</p>
+        <a class="btn" href="/">Get LinkClipper</a>
+      </div>
+    </div>
+
+    <div id="badView" hidden>
+      <div class="broken">
+        <h1 style="font-size:22px;font-weight:600;margin:0 0 8px">This link isn't a complete share</h1>
+        <p class="empty-note">
+          A board share carries its contents inside the link itself. This link is
+          missing its payload — it may have been truncated by a chat or post.
+          Ask the sender for the full link, or
+          <a href="/" style="color:var(--brand-ink)">switch to LinkClipper</a> to share your
+          own boards.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-foot">
+    Shared via <a href="/">LinkClipper</a> — local-first boards for the web you love. ·
+    <a href="/privacy.html">Privacy</a>
+  </footer>
+
+  <script>
+    // Decode side of lib/shares.js (dashboard) — keep in sync.
+    // Wire format: { v: 1, b: { n, c, d? }, i: [ { u, t, s?, w?, g?, k? } ] }
+    (function () {
+      'use strict';
+      var VERSION = 1;
+
+      function decode(text) {
+        if (typeof text !== 'string' || !text) return null;
+        var b64 = text.replace(/-/g, '+').replace(/_/g, '/');
+        while (b64.length % 4) b64 += '=';
+        var bin;
+        try { bin = atob(b64); } catch (e) { return null; }
+        var bytes = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        var payload;
+        try { payload = JSON.parse(new TextDecoder().decode(bytes)); } catch (e) { return null; }
+        if (!payload || payload.v !== VERSION || !payload.b || !Array.isArray(payload.i)) return null;
+        return payload;
+      }
+
+      function textNode(s) { return document.createTextNode(String(s == null ? '' : s)); }
+      function safeUrl(u) {
+        try {
+          var p = new URL(String(u), 'https://x.invalid');
+          return (p.protocol === 'https:' || p.protocol === 'http:') ? p.href : null;
+        } catch (e) { return null; }
+      }
+
+      function render(payload) {
+        document.getElementById('boardView').hidden = false;
+        var bDot = document.getElementById('bDot');
+        bDot.style.background = /^#[0-9a-fA-F]{6}$/.test(payload.b.c || '') ? payload.b.c : '#7b6cff';
+        document.getElementById('bName').textContent = payload.b.n || 'Untitled board';
+        document.getElementById('bDesc').textContent = payload.b.d || '';
+        document.title = '“' + (payload.b.n || 'Untitled board') + '” · shared board · LinkClipper';
+
+        var grid = document.getElementById('bGrid');
+        for (var i = 0; i < payload.i.length; i++) renderCard(grid, payload.i[i]);
+        if (!payload.i.length) {
+          var note = document.createElement('p');
+          note.className = 'empty-note';
+          note.textContent = 'This board was shared without items.';
+          grid.appendChild(note);
+        }
+      }
+
+      function renderCard(grid, it) {
+        var card = document.createElement('div');
+        card.className = 'card';
+        var inner = document.createElement('div');
+        inner.className = 'pos';
+
+        var kind = it.k && String(it.k) !== 'page' ? String(it.k) : 'page';
+        var badge = document.createElement('span');
+        badge.className = 'kind';
+        badge.textContent = kind;
+        inner.appendChild(badge);
+
+        var href = safeUrl(it.u);
+        var a = href ? document.createElement('a') : document.createElement('div');
+        if (href) { a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+
+        var src = it.s ? String(it.s) : '';
+        if (!src && href) { try { src = new URL(href).hostname.replace(/^www\./, ''); } catch (e) {} }
+        if (it.w && /^https?:\/\//i.test(it.w)) {
+          var img = document.createElement('img');
+          img.className = 'art' + (kind === 'reel' ? ' tall' : '');
+          img.src = String(it.w);
+          img.alt = '';
+          img.referrerPolicy = 'no-referrer';
+          img.loading = 'lazy';
+          img.onerror = function () { img.remove(); };
+          a.appendChild(img);
+        }
+        var pad = document.createElement('div');
+        pad.className = 'pad';
+        var ttl = document.createElement('div');
+        ttl.className = 'ttl';
+        ttl.appendChild(textNode(it.t || href || 'Untitled'));
+        pad.appendChild(ttl);
+        if (src) {
+          var srcEl = document.createElement('div');
+          srcEl.className = 'src';
+          srcEl.appendChild(textNode(src));
+          pad.appendChild(srcEl);
+        }
+        if (Array.isArray(it.g) && it.g.length) {
+          var tags = document.createElement('div');
+          tags.className = 'tags';
+          for (var j = 0; j < it.g.length && j < 8; j++) {
+            var chip = document.createElement('span');
+            chip.className = 'chip';
+            chip.appendChild(textNode(it.g[j]));
+            tags.appendChild(chip);
+          }
+          pad.appendChild(tags);
+        }
+        a.appendChild(pad);
+        inner.appendChild(a);
+        card.appendChild(inner);
+        grid.appendChild(card);
+      }
+
+      var m = /(?:^|[#&])d=([A-Za-z0-9_\-=]+)/.exec(decodeURIComponent(location.hash) || '');
+      var payload = m ? decode(m[1]) : null;
+      if (payload) render(payload);
+      else {
+        document.getElementById('badView').hidden = false;
+        document.title = 'Shared board · LinkClipper';
+      }
+    })();
+  </script>
+</body>
+</html>
