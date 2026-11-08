@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy Policy — WebCollector</title>
+<meta name="description" content="WebCollector privacy policy: local-first, no data collection, optional user-owned cloud sync." />
+<link rel="stylesheet" href="styles.css" />
+<link rel="icon" type="image/png" href="assets/icon128.png" />
+</head>
+<body>
+<div class="wrap">
+  <nav class="top">
+    <div class="logo"><span class="mark">W</span> WebCollector</div>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="https://github.com/webcollector-app" target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+  </nav>
+
+  <main class="doc">
+    <h1>Privacy Policy</h1>
+    <p class="up">Last updated: November 8, 2026 · Applies to the WebCollector browser extension and webcollector.app website.</p>
+
+    <h2>The short version</h2>
+    <ul>
+      <li><strong>We do not collect, store, transmit, sell, or share your data.</strong></li>
+      <li>Your saved content stays in <strong>your browser's local storage</strong> on your device.</li>
+      <li>There is <strong>no account, no analytics, no ads, no tracking</strong> of any kind.</li>
+      <li>Cloud backup is <strong>opt-in and user-owned</strong>: it talks only to a Supabase project <em>you</em> create and configure.</li>
+    </ul>
+
+    <h2>What the extension stores and where</h2>
+    <p>WebCollector saves items (URL, title, source, thumbnail URL, tags, notes, extracted article text and preferences) using
+       <strong>chrome.storage.local</strong>, which lives only on your computer inside your browser profile. This data is never sent to the
+       developer or to any third party by the extension.</p>
+
+    <h2>Cloud sync (optional)</h2>
+    <p>If <em>you</em> choose to enable sync, the extension pushes and pulls those same records to/from the
+       <strong>Supabase project credentials you provide</strong>. The developer has no access to that project, never receives your credentials
+       beyond storing them locally in the same local storage, and the sync endpoint is entirely your own database. You can disable sync and
+       delete your cloud data at any time from your Supabase dashboard.</p>
+
+    <h2>Permissions, explained</h2>
+    <ul>
+      <li><strong>storage</strong> — saves your collections locally.</li>
+      <li><strong>activeTab / scripting</strong> — lets the toolbar popup read the page you are saving from when you click it, and inject the in-page save button.</li>
+      <li><strong>Content scripts</strong> — the extension injects its save button only on the social sites it supports (YouTube, Instagram, X/Twitter, Reddit, TikTok).</li>
+      <li><strong>Optional host permissions (per site, on request)</strong> — when you use "Read here" on a saved article, the extension asks once per site for permission to fetch that site's page text for the reading view. You can revoke this at any time in your browser's extension details.</li>
+    </ul>
+
+    <h2>Third-party pages shown to you</h2>
+    <p>Previews may embed or open pages hosted by third parties (e.g. YouTube, Instagram, Vimeo, TikTok). Those platforms see your normal,
+       browser-level connection to their own services, exactly as when you browse them normally. The extension does not route this traffic
+       through any server other than their own.</p>
+
+    <h2>Data deletion</h2>
+    <p>Delete individual items or boards inside the app. To erase everything, remove the extension from your browser profile
+       (this deletes local storage data), and delete your sync database if you set one up.</p>
+
+    <h2>Children's privacy</h2>
+    <p>The extension is a general productivity tool and does not knowingly collect personal information from anyone, including children under 13.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>Material changes will be reflected on this page with an updated date, and noted in the extension's release notes on GitHub.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about privacy: <strong>support@webcollector.app</strong> or open an issue on
+       <a href="https://github.com/webcollector-app" style="color:var(--ink)">GitHub</a>.</p>
+  </main>
+
+  <footer>
+    <div class="f">
+      <span>&#169; 2026 WebCollector</span>
+      <span><a href="index.html">Home</a></span>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
